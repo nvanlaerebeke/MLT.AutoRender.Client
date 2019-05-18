@@ -1,0 +1,18 @@
+.edittext-edit { color: #384452; } 
+.edittext-cancel { color: #ff0000; }
+.edittext-confirm { color: #00ff00; }
+
+.edittext-edit, .edittext-cancel, .edittext-confirm {
+    margin-left: 0.5em;
+}
+
+.edittext > div {
+    display: inline-block;
+}
+.edittext input {
+    width: 100%;
+}
+
+.edittext_input {
+    width: 100%;
+}

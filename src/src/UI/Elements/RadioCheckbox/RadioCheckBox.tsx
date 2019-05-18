@@ -1,4 +1,6 @@
 import * as React from 'react';
+import classNames from 'classnames';
+
 import "./RadioCheckBox.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faCheckCircle } from "@fortawesome/free-regular-svg-icons";
@@ -29,13 +31,21 @@ export class RadioCheckBox extends React.Component<RadioCheckBoxProps, RadioChec
     };
 
     render() {
-        return (<div className="radiocheckbox" onClick={this.InvertSelection}>
-            <div>
-                {this.state.Selected}
+        return (<>
+            <div 
+                className={classNames({
+                    'radiocheckbox': true,
+                    'radiocheckbox-selected': this.state.Selected
+                })} 
+                onClick={this.InvertSelection}
+            >
+                <div>
+                    {this.state.Selected}
+                </div>
+                <div>
+                    <FontAwesomeIcon className={"radiocheckbox_box"} icon={(this.state.Selected) ? faCheckCircle : faCircle} />
+                </div>
             </div>
-            <div>
-                <FontAwesomeIcon className="radiocheckbox_box" icon={(this.state.Selected) ? faCheckCircle : faCircle} />
-            </div>
-          </div>)
+        </>)
     }
 }

@@ -1,0 +1,61 @@
+/**
+ * Grid Setup
+ */
+.workspaceitem {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 2em min-content auto;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+        "workspaceitem_status workspaceitem_message workspaceitem_empty"
+        "workspaceitem_status workspaceitem_info workspaceitem_empty";
+  }
+.workspaceitem_status { grid-area: workspaceitem_status; }
+.workspaceitem_message { grid-area: workspaceitem_message; }
+.workspaceitem_info { grid-area: workspaceitem_info; }
+.workspaceitem_empty { grid-area: workspaceitem_empty; }
+
+/**
+ * Content
+ */
+.workspaceitem_status {
+    font-size: 2em;
+    text-align: center;
+}
+
+.workspaceitem_success, .workspaceitem_busy {
+    color: #155724;
+}
+
+.workspaceitem_error {
+    color: #721c24;
+}
+
+.workspaceitem_queued, .workspaceitem_paused {
+    color: #856404;
+}
+
+.workspaceitem_busy_progress {
+    font-size: 0.7em;
+}
+
+.workspaceitem_message {
+    padding-left:1em;
+}
+
+.alert {
+    margin:0px !important;
+}
+
+.workspaceitem_info {
+    padding-left:1em;
+
+    display:grid;
+    grid-template-columns: min-content min-content;
+    grid-template-rows: 1fr 1fr;
+}
+
+.workspaceitem_info > div {
+    white-space: nowrap;
+    padding: 0.2em;
+}

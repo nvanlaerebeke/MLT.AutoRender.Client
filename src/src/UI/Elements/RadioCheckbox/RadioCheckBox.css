@@ -2,11 +2,14 @@
     color: #384452;
 }
 
+.radiocheckbox-selected {
+    color: #FF8C00;
+}
+
 .radiocheckbox > div {
     display:inline-block;
 }
 
 .radiocheckbox_box {
-    font-size:2em;
+    cursor: pointer;
 }
-

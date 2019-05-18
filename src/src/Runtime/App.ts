@@ -6,5 +6,6 @@ export class App {
     Start() {
         this.UI = new AppUI();
         this.UI.Start();
+        this.UI.Show();
     }
 }

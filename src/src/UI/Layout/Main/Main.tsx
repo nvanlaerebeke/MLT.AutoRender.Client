@@ -5,9 +5,9 @@ import React from 'react';
 import * as Client from "../../../Mitto/Connection/Connection";
 
 //Layout
-import { Header } from "../../Component/Layout/Header/Header";
-import { ActionBar } from "../../Component/Layout/ActionBar/ActionBar";
-import { Workspace } from "../../Component/Layout/Workspace/Workspace";
+import { Header } from "./Header/Header";
+import { ActionBar } from "./ActionBar/ActionBar"
+import { Workspace } from "../../Component/Workspace/Workspace";
 import "./Main.css";
 
 

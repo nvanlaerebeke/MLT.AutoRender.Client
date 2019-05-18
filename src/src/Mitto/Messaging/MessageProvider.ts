@@ -21,6 +21,7 @@ function UIntToString(uintArray: number[]) {
 }
 
 function GetMessage(pMessage: RequestMessage, pJson: any) {
+    console.log(pJson);
     let objMessage = null;
     switch(pJson.Name) {
         case 'ACKResponse':

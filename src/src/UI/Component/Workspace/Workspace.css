@@ -1,5 +1,9 @@
 .workspace {
+    overflow-y:auto;
+    overflow-x:auto;
+    
     background-color: #9FA3A7;
+    
     padding: 1em;
     right:0;
     left:0;
@@ -8,6 +12,10 @@
 
 .workspaceitems {
     color:black;
+    
+    border: 1px solid #384452;
+    border-radius: 20px;
+
     display:grid;
     background-color: #5F5F5F;
 }
@@ -24,8 +32,6 @@
 }
 
 .workspaceitems > div:hover {
-    /*background-color:#c0c0c0;
-    cursor: pointer;*/
     border:1px solid #384452;
 }
 

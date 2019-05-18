@@ -2,13 +2,13 @@
 import * as React from 'react';
 
 //Messaging
-import * as Connection from '../../../../Mitto/Connection/Connection';
-import * as RequestManager from "../../../../Mitto/Messaging/Manager/RequestManager";
-import { Request } from "../../../../Mitto/Messaging/Request";
-import { ReloadRequest } from "../../../../Messaging/Request/ReloadRequest";
-import { GetStatusResponse } from "../../../../Messaging/Response/GetStatusResponse";
-import { WorkspaceItem } from "../../../../Model/WorkspaceItem";
-import { WorkspaceItem as WorkspaceItemUI} from "../../Elements/WorkspaceItem/WorkspaceItem";
+import * as Connection from '../../../Mitto/Connection/Connection';
+import * as RequestManager from "../../../Mitto/Messaging/Manager/RequestManager";
+import { Request } from "../../../Mitto/Messaging/Request";
+import { ReloadRequest } from "../../../Messaging/Request/ReloadRequest";
+import { GetStatusResponse } from "../../../Messaging/Response/GetStatusResponse";
+import { WorkspaceItem } from "../../../Model/WorkspaceItem";
+import { WorkspaceItem as WorkspaceItemUI} from "../WorkspaceItem/WorkspaceItem";
 
 //Layout
 import "./Workspace.css";
@@ -29,7 +29,7 @@ export class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
         this.state = {
             status: "Loading",
             workspaceitems:  [],
-            sources: []
+            sources: [ "test" ]
         }
     }
 
@@ -49,32 +49,34 @@ export class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
 
     private Refresh() {
         this.setState({ status: "Loading" });
+
         RequestManager.DoRequest(new Request(new ReloadRequest(), (r: GetStatusResponse) => {
             this.setState({
                 status: "Ready",
                 workspaceitems: r.WorkspaceItems
             }, () => {
                 this.UpdateSources()
+                //setInterval(() => this.addItem(), 2000);
             });
         }));
     }
 
-    private UpdateSources() {
-        let sources: string[] = [];
+    UpdateSources() {
+        let sources = this.state.sources;
+        sources.length = 0;
         this.state.workspaceitems.forEach(i => { 
             if(i.Project && i.Project.SourceName) {
                 sources.push(i.Project.SourceName);
             }
         });
-        this.setState({sources: sources});
+        this.setState({ sources });
     }
 
     render() {
-        let workspace = this.GetWorkspace();
         return (
             <div className="workspace">
                 <h2>Project Overview:</h2>
-                {workspace}
+                {this.GetWorkspace()}
             </div>
         )
     }

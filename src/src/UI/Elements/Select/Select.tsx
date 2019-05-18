@@ -24,11 +24,18 @@ export class Select extends React.Component<SelectProps, SelectState> {
         }
     }
     
+    private SelectionChanged = () => {
+        console.log("changed");
+    }
+
     render() {
+        let i = 0;
         return (<div className="select">
-            <select>
-                {this.state.Options.map(function(item) {
-                    return <option>{item}</option>
+            <select value={this.state.Selected} onChange={this.SelectionChanged}>
+                <option key="0" value=""></option>
+                {this.state.Options.map((item) => {
+                    i++
+                    return <option key={i} value={item}>{item}</option>
                 })} 
             </select>
             <div className="select__arrow"></div>

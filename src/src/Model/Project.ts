@@ -9,5 +9,5 @@ export class Project {
     TargetName!: string;
     Progress!: number;
     StartTime!: number;
-    TimeTake!: number;
+    TimeTaken!: number;
 }
