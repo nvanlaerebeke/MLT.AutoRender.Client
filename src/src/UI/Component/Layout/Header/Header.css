@@ -1,0 +1,36 @@
+.header {
+    background-color: #384452;
+    color:white;
+    font-family: 'Lato, sans-serif';
+
+    display:grid;
+    grid-template-columns: 50px auto 50px;
+}
+
+.header > div {
+    display:inline-block;
+    padding-left:1em;
+    height:100%;
+    line-height:50px;
+}
+
+.header > div:last-child {
+    padding:0;
+}
+
+.header_logo img {
+    height: 30px;
+}
+
+.header_title {
+    font-size: 2em;
+    text-align:center;
+}
+
+.header_menu {
+    text-align: center;
+}
+
+.header_menu:hover {
+    background-color: lightslategray;
+}

@@ -1,0 +1,14 @@
+html, body {
+    height:100%;
+    user-select: none;
+}
+
+#root {
+    height:100%;
+}
+
+.main {
+    height:100%;
+    display:grid;
+    grid-template-rows: 50px 2em auto;
+}

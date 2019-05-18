@@ -1,0 +1,43 @@
+.workspace {
+    background-color: #9FA3A7;
+    padding: 1em;
+    right:0;
+    left:0;
+    bottom:0;
+}
+
+.workspaceitems {
+    color:black;
+    display:grid;
+    background-color: #5F5F5F;
+}
+
+.workspaceitems > div {
+    background: #eee;
+    border: 1px solid transparent;
+    padding: 1em;
+    margin: 1em;
+}
+
+.workspaceitems > div:nth-child(odd) {
+    background:#ddd;
+}
+
+.workspaceitems > div:hover {
+    /*background-color:#c0c0c0;
+    cursor: pointer;*/
+    border:1px solid #384452;
+}
+
+.workspace_loading {
+    height:100%;
+    width:100%;
+    line-height:100%;
+    text-align: center;
+    font-size: 5em;
+    color: #384452;
+}
+
+.workspace_loading > svg {
+    animation: fa-spin 2s infinite linear;
+}

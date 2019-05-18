@@ -1,0 +1,12 @@
+.radiocheckbox {
+    color: #384452;
+}
+
+.radiocheckbox > div {
+    display:inline-block;
+}
+
+.radiocheckbox_box {
+    font-size:2em;
+}
+

@@ -1,0 +1,27 @@
+.workspaceitem {
+    display:grid;
+    grid-template-columns: 2em auto;
+}
+
+.workspaceitem_checkbox {
+    position: relative;
+    top:33%;
+    cursor: pointer;
+}
+
+.workspaceitem_info {
+    padding-left:1em;
+   
+    /*display:gird;*/
+    /*grid-template-columns: 1fr 1fr;*/
+    /*grid-template-rows: 1fr 1fr 1fr;*/
+
+    display:grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.workspaceitem_info > div {
+    white-space: nowrap;
+    padding: 0.2em;
+}
