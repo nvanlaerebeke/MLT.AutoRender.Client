@@ -25,7 +25,7 @@ export class Frame {
         this.Data.forEach(b => arrData.push(b));
         return arrData;
     }
-    
+
 }
 
 export function CreateFromBytes(pData: number[]) {
@@ -45,8 +45,9 @@ function GetRequestIDFromByteArray(pData: number[]) {
 function GetNameFromByteArray(pData: number[]) {
     let afterRequestID = 2 + pData[1];
     let end  = afterRequestID + pData[afterRequestID] + 1;
-    let arrBytes = pData.slice(afterRequestID, end);
-    return UIntToString(arrBytes);
+    let arrBytes = pData.slice(afterRequestID + 1, end);
+    let name = UIntToString(arrBytes);
+    return name;
 }
 
 function GetDataFromByteArray(pData: number[]) {
@@ -87,19 +88,19 @@ function toUTF8Array(str: string) {
         var charcode = str.charCodeAt(i);
         if (charcode < 0x80) utf8.push(charcode);
         else if (charcode < 0x800) {
-            utf8.push(0xc0 | (charcode >> 6), 
+            utf8.push(0xc0 | (charcode >> 6),
                       0x80 | (charcode & 0x3f));
         }
         else if (charcode < 0xd800 || charcode >= 0xe000) {
-            utf8.push(0xe0 | (charcode >> 12), 
-                      0x80 | ((charcode>>6) & 0x3f), 
+            utf8.push(0xe0 | (charcode >> 12),
+                      0x80 | ((charcode>>6) & 0x3f),
                       0x80 | (charcode & 0x3f));
         } else { // surrogate pair
             i++;
             charcode = ((charcode&0x3ff)<<10)|(str.charCodeAt(i)&0x3ff)
-            utf8.push(0xf0 | (charcode >>18), 
-                      0x80 | ((charcode>>12) & 0x3f), 
-                      0x80 | ((charcode>>6) & 0x3f), 
+            utf8.push(0xf0 | (charcode >>18),
+                      0x80 | ((charcode>>12) & 0x3f),
+                      0x80 | ((charcode>>6) & 0x3f),
                       0x80 | (charcode & 0x3f));
         }
     }

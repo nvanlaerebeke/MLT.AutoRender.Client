@@ -1,10 +1,12 @@
 import { RequestMessage } from '../../Mitto/Messaging/Request/RequestMessage';
 
 export class GetStatusRequest extends RequestMessage  {
-    WorkspaceItemIDs!: string[];
+    private WorkspaceItemIDs: string[] = [];
 
-    constructor(pProjectID: string) {
+    constructor(pProjectID?: string) {
         super();
-        this.WorkspaceItemIDs = [ pProjectID ];
+        if(pProjectID) {
+            this.WorkspaceItemIDs.push(pProjectID);
+        }
     }
 }

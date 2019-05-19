@@ -9,7 +9,7 @@ class WebSocketClient extends EventEmitter {
     public Status: string = "Disconnected";
     private URL: string;
     private Client!: WebSocket;
-    
+
     constructor(pUrl: string) {
         super();
 
@@ -21,7 +21,7 @@ class WebSocketClient extends EventEmitter {
         let main = this;
 
         this.Client = new WebSocket(this.URL);
-        this.Client.onopen = () => { 
+        this.Client.onopen = () => {
             this.Status = "Connected";
             main.emit("connected");
         };
@@ -31,7 +31,7 @@ class WebSocketClient extends EventEmitter {
                 let arrData: number[] = [];
                 new Uint8Array(arrayBuff).forEach(b => arrData.push(b));
                 RequestManager.Receive(RoutingFrame.CreateFromBytes(arrData).Data);
-            }).catch(function (err) { 
+            }).catch(function (err) {
                 main.emit('error', err);
             });
         };
@@ -50,13 +50,19 @@ class WebSocketClient extends EventEmitter {
     }
 }
 
-let url: string = "ws://192.168.0.119:8080";
-let Client = new WebSocketClient(url);
+//let url: string = "ws://192.168.0.119:8080";
+/*export function CreateClient(pUrl: string) {
+    Client = new WebSocketClient(pUrl);
+    Client.on('closed', function() {
+        Client.Connect();
+    });
+    return Client;
+}*/
 
-Client.on('closed', function() {
-    Client.Connect();
-});
-
-export function GetClient() {
+let Client: WebSocketClient;
+export function GetClient(pUrl?: string) {
+    if(!Client && pUrl) {
+        Client = new WebSocketClient(pUrl);
+    }
     return Client;
 }

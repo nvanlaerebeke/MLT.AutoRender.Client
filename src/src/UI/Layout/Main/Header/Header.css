@@ -4,7 +4,13 @@
     font-family: 'Lato, sans-serif';
 
     display:grid;
+}
+.header_desktop {
     grid-template-columns: 50px auto 50px;
+}
+
+.header_web {
+    grid-template-columns: 50px auto;
 }
 
 .header > div {

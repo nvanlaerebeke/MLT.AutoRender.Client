@@ -10,5 +10,5 @@ html, body {
 .main {
     height:100%;
     display:grid;
-    grid-template-rows: 50px 2em auto;
+    grid-template-rows: 50px max-content;
 }

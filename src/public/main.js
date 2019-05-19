@@ -22,14 +22,14 @@ function createWindow() {
           ? "http://localhost:3000"
           : `file://${path.join(__dirname, "../build/index.html")}`
       );
-    
+
     // Open the DevTools.
     if(isDev) {
         mainWindow.webContents.openDevTools();
     }
 
-    mainWindow.on("ready-to-show", () => { 
-        mainWindow.show(); 
+    mainWindow.on("ready-to-show", () => {
+        mainWindow.show();
     });
 
     // Emitted when the window is closed.

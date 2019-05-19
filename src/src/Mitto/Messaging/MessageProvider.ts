@@ -1,18 +1,28 @@
+/**
+ * ToDo: Clean this up, make getting the msg's & actions dynamic
+ */
 import { Frame } from "../Routing/Frame";
 import { EchoResponse } from "./Response/EchoResponse"
-//import { EchoRequest } from "./Request/EchoRequest"
-import { ResponseMessage } from "./Response/ResponseMessage"
 import { RequestMessage } from "./Request/RequestMessage";
 import { ACKResponse } from "./Response/ACKResponse";
 import { GetStatusResponse } from "../../Messaging/Response/GetStatusResponse";
+import { SendWorkspaceUpdateRequest } from "../../Messaging/Notification/SendWorkspaceUpdateRequest";
 
-export function CreateFromBytes(pRequestMessage: RequestMessage, pFrame: Frame) {
-    let strJSON = UIntToString(pFrame.Data);
-    let objJSON = JSON.parse(strJSON);
-    let objMessage = GetMessage(pRequestMessage, objJSON);
-    if(objMessage != null) {
-        return objMessage as ResponseMessage;
-    }
+export function CreateResponseMessageFromBytes(pRequestMessage: RequestMessage, pFrame: Frame) {
+    return GetResponseMessage(
+        pRequestMessage,
+        JSON.parse(
+            UIntToString(pFrame.Data)
+        )
+    );
+}
+
+export function CreateRequestMessageFromBytes(pFrame: Frame) {
+    return GetRequestMessage(
+        JSON.parse(
+            UIntToString(pFrame.Data)
+        )
+    );
 }
 
 function UIntToString(uintArray: number[]) {
@@ -20,8 +30,20 @@ function UIntToString(uintArray: number[]) {
     return decodeURIComponent(escape(encodedString));;
 }
 
-function GetMessage(pMessage: RequestMessage, pJson: any) {
-    console.log(pJson);
+
+function GetRequestMessage(pJson: any) {
+    let objMessage = null;
+    switch(pJson.Name) {
+        case "SendWorkspaceUpdatedRequest":
+            objMessage = new SendWorkspaceUpdateRequest();
+    }
+    if(objMessage) {
+        Object.assign(objMessage, pJson);
+    }
+    return objMessage;
+}
+
+function GetResponseMessage(pMessage: RequestMessage, pJson: any) {
     let objMessage = null;
     switch(pJson.Name) {
         case 'ACKResponse':
@@ -35,19 +57,8 @@ function GetMessage(pMessage: RequestMessage, pJson: any) {
             break;
     }
 
-    if(objMessage !== null) {
+    if(objMessage) {
         Object.assign(objMessage, pJson);
     }
     return objMessage;
 }
-
-/**
- * ToDo: make everything dynamic
- */
-/*
-declare global {
-    interface Window { MyNamespace: any; }
-}
-
-window.MyNamespace = window.MyNamespace || {};
-*/

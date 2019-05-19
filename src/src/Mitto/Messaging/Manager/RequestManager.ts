@@ -1,11 +1,15 @@
 import { Request } from "../Request";
 import * as FrameProvider from "../../Routing/Frame";
 import * as MessageProvider from "../MessageProvider";
+import * as ActionManager from "../Manager/ActionManager";
 
+/**
+ * ToDo: making requests should use promises instead of callbacks
+ */
 class RequestManager {
     private Requests: Request[];
 
-    constructor() { 
+    constructor() {
         this.Requests = [];
     }
 
@@ -16,13 +20,22 @@ class RequestManager {
 
     Receive(pData: number[]) {
         let objFrame = FrameProvider.CreateFromBytes(pData);
-        for(let i = 0; i < this.Requests.length; i++) {
-            if(this.Requests[i].RequestMessage.ID === objFrame.RequestID) {
-                let objMessage = MessageProvider.CreateFromBytes(this.Requests[i].RequestMessage, objFrame);
-                if(objMessage != null) {
-                    this.Requests[i].Receive(objMessage);
+        if(objFrame.MessageType === "Response") {
+            for(let i = 0; i < this.Requests.length; i++) {
+                if(this.Requests[i].RequestMessage.ID === objFrame.RequestID) {
+                    let objMessage = MessageProvider.CreateResponseMessageFromBytes(this.Requests[i].RequestMessage, objFrame);
+                    if(objMessage != null) {
+                        this.Requests[i].Receive(objMessage);
+                    }
                 }
             }
+        } else if(objFrame.MessageType === "Notification") {
+            let objMessage = MessageProvider.CreateRequestMessageFromBytes(objFrame);
+            if(objMessage) {
+                ActionManager.Handle(objMessage);
+            }
+        } else if(objFrame.MessageType === "Request") {
+            //not implemented yet
         }
     }
 }

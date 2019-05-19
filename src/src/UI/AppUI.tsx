@@ -7,11 +7,15 @@ import * as serviceWorker from './serviceWorker';
 //UI
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+
 export class AppUI {
 
-    Start() {
+    Start(pPlatform: string) {
+        Platform = pPlatform;
+
         ReactDOM.render(<Main />, document.getElementById('root'));
-        
+
         // If you want your app to work offline and load faster, you can change
         // unregister() to register() below. Note this comes with some pitfalls.
         // Learn more about service workers: https://bit.ly/CRA-PWA
@@ -22,3 +26,7 @@ export class AppUI {
         ReactDOM.render(<Main />, document.getElementById('root'));
     }
 }
+let Platform = "web";
+export function GetPlatform() {
+    return Platform;
+};

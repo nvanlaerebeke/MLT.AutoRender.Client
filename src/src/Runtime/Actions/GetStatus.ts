@@ -1,13 +1,20 @@
 import * as RequestManager from "../../Mitto/Messaging/Manager/RequestManager";
 import { Request } from "../../Mitto/Messaging/Request"
-import { ReloadRequest } from "../../Messaging/Request/ReloadRequest"
+import { GetStatusRequest } from "../../Messaging/Request/GetStatusRequest"
 import { GetStatusResponse } from "../../Messaging/Response/GetStatusResponse";
 
-export class Reload {
+export class GetStatus {
+    private ProjectID?: string;
+    constructor(pProjectID?: string) {
+        if(pProjectID) {
+            this.ProjectID = pProjectID;
+        }
+    }
+
     public Send(pCallback: (r: GetStatusResponse) => void) {
         RequestManager.DoRequest(
             new Request(
-                new ReloadRequest(),
+                (this.ProjectID) ? new GetStatusRequest(this.ProjectID): new GetStatusRequest(),
                 pCallback
             )
         );

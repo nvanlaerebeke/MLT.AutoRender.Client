@@ -7,36 +7,40 @@ import { faCircle, faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 
 
-export interface RadioCheckBoxProps { 
-    Selected: boolean
+export interface RadioCheckBoxProps {
+    Selected?: boolean
+    OnSelectionChanged: (Selected: boolean) => void;
 };
 
-export interface RadioCheckBoxItemState { 
+export interface RadioCheckBoxItemState {
     Selected: boolean
 };
 
 
 export class RadioCheckBox extends React.Component<RadioCheckBoxProps, RadioCheckBoxItemState> {
-    
+    private OnSelectionChanged: (Selected: boolean) => void;
+
     constructor(props: RadioCheckBoxProps) {
         super(props);
-        
+        this.OnSelectionChanged = props.OnSelectionChanged;
         this.state = {
-            Selected: props.Selected
+            Selected: props.Selected ? props.Selected: false
         }
     }
 
     private InvertSelection = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        this.setState({Selected: !this.state.Selected});
+        this.setState({Selected: !this.state.Selected}, () => {
+            this.OnSelectionChanged(this.state.Selected);
+        });
     };
 
     render() {
         return (<>
-            <div 
+            <div
                 className={classNames({
                     'radiocheckbox': true,
                     'radiocheckbox-selected': this.state.Selected
-                })} 
+                })}
                 onClick={this.InvertSelection}
             >
                 <div>
