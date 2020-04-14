@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker';
 //UI
 import 'bootstrap/dist/css/bootstrap.css';
 
-
-
 export class AppUI {
 
     Start(pPlatform: string) {
@@ -24,6 +22,14 @@ export class AppUI {
 
     Show() {
         ReactDOM.render(<Main />, document.getElementById('root'));
+    }
+
+    Open(pWindow: string) {
+        if(GetPlatform() === "desktop") {
+            //open new window
+        } else {
+            //show bootstrap/jquery window
+        }
     }
 }
 let Platform = "web";

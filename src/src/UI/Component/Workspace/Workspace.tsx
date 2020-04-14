@@ -33,7 +33,7 @@ export class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
 
     constructor(props: WorkspaceProps) {
         super(props);
-        this.ClientConnection = Client.GetClient("ws://192.168.0.119:8080");
+        this.ClientConnection = Client.GetClient("ws://localhost:37697");
 
         this.state = {
             status: "Loading",

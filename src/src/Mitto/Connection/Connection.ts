@@ -50,15 +50,6 @@ class WebSocketClient extends EventEmitter {
     }
 }
 
-//let url: string = "ws://192.168.0.119:8080";
-/*export function CreateClient(pUrl: string) {
-    Client = new WebSocketClient(pUrl);
-    Client.on('closed', function() {
-        Client.Connect();
-    });
-    return Client;
-}*/
-
 let Client: WebSocketClient;
 export function GetClient(pUrl?: string) {
     if(!Client && pUrl) {
