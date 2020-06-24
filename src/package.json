@@ -1,5 +1,5 @@
 {
-  "name": "AutoRender Client",
+  "name": "AutoRenderClient",
   "description": "Client for the AutoRender Server to render MLT files",
   "author": "Nico Van Laerebeke",
   "build": {
